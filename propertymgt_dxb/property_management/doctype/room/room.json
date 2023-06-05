@@ -1,0 +1,77 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2023-06-01 01:48:10.266045",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "apartment",
+  "flat_no",
+  "room_no",
+  "service_type",
+  "capacity",
+  "available_bed_space"
+ ],
+ "fields": [
+  {
+   "fieldname": "apartment",
+   "fieldtype": "Link",
+   "label": "Apartment",
+   "options": "Apartment"
+  },
+  {
+   "fieldname": "flat_no",
+   "fieldtype": "Link",
+   "label": "Flat No.",
+   "options": "Flat"
+  },
+  {
+   "fieldname": "room_no",
+   "fieldtype": "Data",
+   "label": "Room No."
+  },
+  {
+   "fieldname": "capacity",
+   "fieldtype": "Select",
+   "label": "Capacity",
+   "options": "\n1\n2\n3\n4"
+  },
+  {
+   "fieldname": "service_type",
+   "fieldtype": "Link",
+   "label": "Service Type",
+   "options": "Item"
+  },
+  {
+   "fieldname": "available_bed_space",
+   "fieldtype": "Data",
+   "label": "Available Bed Space"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2023-06-05 18:54:57.072935",
+ "modified_by": "Administrator",
+ "module": "Property Management",
+ "name": "Room",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

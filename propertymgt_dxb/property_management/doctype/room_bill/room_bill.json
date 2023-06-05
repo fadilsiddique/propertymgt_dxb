@@ -1,0 +1,101 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2023-06-05 19:02:41.294333",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "apartment",
+  "flat_no",
+  "room_no",
+  "bill_type",
+  "sewa_amount",
+  "electricity_amount",
+  "water_amount",
+  "gas_amount",
+  "internet_amount"
+ ],
+ "fields": [
+  {
+   "fieldname": "apartment",
+   "fieldtype": "Link",
+   "label": "Apartment",
+   "options": "Apartment"
+  },
+  {
+   "fieldname": "flat_no",
+   "fieldtype": "Link",
+   "label": "Flat No.",
+   "options": "Flat"
+  },
+  {
+   "fieldname": "room_no",
+   "fieldtype": "Link",
+   "label": "Room No.",
+   "options": "Room"
+  },
+  {
+   "fieldname": "bill_type",
+   "fieldtype": "Select",
+   "label": "Bill Type",
+   "options": "\nSEWA\nElectricity\nWater\nGas\nInternet"
+  },
+  {
+   "depends_on": "eval:doc.bill_type=='SEWA'",
+   "fieldname": "sewa_amount",
+   "fieldtype": "Float",
+   "label": "SEWA Amount"
+  },
+  {
+   "depends_on": "eval:doc.bill_type=='Electricity'",
+   "fieldname": "electricity_amount",
+   "fieldtype": "Float",
+   "label": "Electricity Amount"
+  },
+  {
+   "depends_on": "eval:doc.bill_type=='Water'",
+   "fieldname": "water_amount",
+   "fieldtype": "Float",
+   "label": "Water Amount"
+  },
+  {
+   "depends_on": "eval:doc.bill_type=='Gas'",
+   "fieldname": "gas_amount",
+   "fieldtype": "Float",
+   "label": "Gas Amount"
+  },
+  {
+   "depends_on": "eval:doc.bill_type=='Internet'",
+   "fieldname": "internet_amount",
+   "fieldtype": "Float",
+   "label": "Internet Amount"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2023-06-05 19:07:54.718843",
+ "modified_by": "Administrator",
+ "module": "Property Management",
+ "name": "Room Bill",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
