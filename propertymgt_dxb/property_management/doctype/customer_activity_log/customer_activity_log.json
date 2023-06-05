@@ -1,0 +1,124 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2023-06-06 01:22:11.582186",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "customer",
+  "apartment",
+  "flat_no",
+  "room_no",
+  "activity_type",
+  "check_in_date",
+  "check_out_date",
+  "from",
+  "to",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "Customer",
+   "options": "Customer"
+  },
+  {
+   "fieldname": "apartment",
+   "fieldtype": "Link",
+   "label": "Apartment",
+   "options": "Apartment"
+  },
+  {
+   "fieldname": "flat_no",
+   "fieldtype": "Link",
+   "label": "Flat No.",
+   "options": "Flat"
+  },
+  {
+   "fieldname": "room_no",
+   "fieldtype": "Link",
+   "label": " Room No.",
+   "options": "Room"
+  },
+  {
+   "fieldname": "activity_type",
+   "fieldtype": "Select",
+   "label": "Activity Type",
+   "options": "\nCheck-In\nCheck-Out\nVacation"
+  },
+  {
+   "depends_on": "eval:doc.activity_type=='Check-In'",
+   "fieldname": "check_in_date",
+   "fieldtype": "Date",
+   "label": "Check In Date"
+  },
+  {
+   "depends_on": "eval:doc.activity_type=='Check-Out'",
+   "fieldname": "check_out_date",
+   "fieldtype": "Date",
+   "label": "Check Out Date"
+  },
+  {
+   "depends_on": "eval:doc.activity_type=='Vacation'",
+   "fieldname": "from",
+   "fieldtype": "Date",
+   "label": "From"
+  },
+  {
+   "depends_on": "eval:doc.activity_type=='Vacation'",
+   "fieldname": "to",
+   "fieldtype": "Date",
+   "label": "To"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Customer Activity Log",
+   "print_hide": 1,
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2023-06-06 01:23:49.078349",
+ "modified_by": "Administrator",
+ "module": "Property Management",
+ "name": "Customer Activity Log",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [
+  {
+   "color": "Green",
+   "title": "Check-In"
+  },
+  {
+   "color": "Red",
+   "title": "Check-Out"
+  },
+  {
+   "color": "Yellow",
+   "title": "Vacation"
+  }
+ ]
+}
