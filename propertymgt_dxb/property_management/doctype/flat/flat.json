@@ -13,7 +13,8 @@
   "flat_no",
   "no_of_rooms",
   "maximum_number_of_tenants",
-  "no_of_available_bed_space"
+  "no_of_available_bed_space",
+  "rooms"
  ],
  "fields": [
   {
@@ -52,11 +53,17 @@
    "fieldname": "owner_name",
    "fieldtype": "Data",
    "label": "Owner Name"
+  },
+  {
+   "fieldname": "rooms",
+   "fieldtype": "Table",
+   "label": "Rooms",
+   "options": "Rooms"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-06-05 18:56:02.979377",
+ "modified": "2023-06-06 01:30:04.623497",
  "modified_by": "Administrator",
  "module": "Property Management",
  "name": "Flat",

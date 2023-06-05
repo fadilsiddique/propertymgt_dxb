@@ -1,6 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
+ "autoname": "apartment_name",
  "creation": "2023-06-01 01:24:34.019645",
  "default_view": "List",
  "doctype": "DocType",
@@ -13,7 +14,8 @@
   "citytown",
   "emirate",
   "country",
-  "postal_code"
+  "postal_code",
+  "flats"
  ],
  "fields": [
   {
@@ -53,14 +55,21 @@
    "fieldname": "postal_code",
    "fieldtype": "Data",
    "label": "Postal Code"
+  },
+  {
+   "fieldname": "flats",
+   "fieldtype": "Table",
+   "label": "Flats",
+   "options": "Flats"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-06-01 01:32:04.700427",
+ "modified": "2023-06-06 01:51:23.133998",
  "modified_by": "Administrator",
  "module": "Property Management",
  "name": "Apartment",
+ "naming_rule": "Expression (old style)",
  "owner": "Administrator",
  "permissions": [
   {

@@ -12,7 +12,8 @@
   "room_no",
   "service_type",
   "capacity",
-  "available_bed_space"
+  "available_bed_space",
+  "tenants"
  ],
  "fields": [
   {
@@ -48,11 +49,17 @@
    "fieldname": "available_bed_space",
    "fieldtype": "Data",
    "label": "Available Bed Space"
+  },
+  {
+   "fieldname": "tenants",
+   "fieldtype": "Table",
+   "label": "Tenants",
+   "options": "Customers"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-06-05 18:54:57.072935",
+ "modified": "2023-06-06 01:32:48.810333",
  "modified_by": "Administrator",
  "module": "Property Management",
  "name": "Room",
