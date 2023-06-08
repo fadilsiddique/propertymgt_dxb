@@ -1,6 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
+ "autoname": "format:{apartment}-{flat_no}",
  "creation": "2023-06-01 01:39:26.936852",
  "default_view": "List",
  "doctype": "DocType",
@@ -63,10 +64,11 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-06-06 01:30:04.623497",
+ "modified": "2023-06-06 02:21:21.554798",
  "modified_by": "Administrator",
  "module": "Property Management",
  "name": "Flat",
+ "naming_rule": "Expression (old style)",
  "owner": "Administrator",
  "permissions": [
   {

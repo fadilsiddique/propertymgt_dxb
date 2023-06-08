@@ -1,7 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "apartment_name",
+ "autoname": "field:apartment_name",
  "creation": "2023-06-01 01:24:34.019645",
  "default_view": "List",
  "doctype": "DocType",
@@ -21,7 +21,8 @@
   {
    "fieldname": "apartment_name",
    "fieldtype": "Data",
-   "label": "Apartment Name"
+   "label": "Apartment Name",
+   "unique": 1
   },
   {
    "fieldname": "address_line_1",
@@ -65,11 +66,11 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-06-06 01:51:23.133998",
+ "modified": "2023-06-06 02:26:35.434809",
  "modified_by": "Administrator",
  "module": "Property Management",
  "name": "Apartment",
- "naming_rule": "Expression (old style)",
+ "naming_rule": "By fieldname",
  "owner": "Administrator",
  "permissions": [
   {

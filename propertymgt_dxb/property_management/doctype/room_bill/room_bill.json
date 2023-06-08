@@ -1,6 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
+ "autoname": "format:RB-{MM}-{YY}-{#####}",
  "creation": "2023-06-05 19:02:41.294333",
  "default_view": "List",
  "doctype": "DocType",
@@ -10,12 +11,16 @@
   "apartment",
   "flat_no",
   "room_no",
+  "sewa_bill_date",
   "bill_type",
   "sewa_amount",
   "electricity_amount",
   "water_amount",
   "gas_amount",
-  "internet_amount"
+  "internet_amount",
+  "customers",
+  "total_days_of_occupancy",
+  "amended_from"
  ],
  "fields": [
   {
@@ -71,15 +76,41 @@
    "fieldname": "internet_amount",
    "fieldtype": "Float",
    "label": "Internet Amount"
+  },
+  {
+   "fieldname": "customers",
+   "fieldtype": "Table",
+   "label": "Customers",
+   "options": "Customers"
+  },
+  {
+   "fieldname": "sewa_bill_date",
+   "fieldtype": "Date",
+   "label": "SEWA Bill Date"
+  },
+  {
+   "fieldname": "total_days_of_occupancy",
+   "fieldtype": "Data",
+   "label": "Total Days Of Occupancy"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Room Bill",
+   "print_hide": 1,
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2023-06-05 19:07:54.718843",
+ "modified": "2023-06-08 16:22:22.783497",
  "modified_by": "Administrator",
  "module": "Property Management",
  "name": "Room Bill",
+ "naming_rule": "Expression (old style)",
  "owner": "Administrator",
  "permissions": [
   {

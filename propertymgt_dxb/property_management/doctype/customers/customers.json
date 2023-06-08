@@ -6,20 +6,59 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "customer"
+  "customer",
+  "qty",
+  "rate",
+  "days",
+  "amount"
  ],
  "fields": [
   {
    "fieldname": "customer",
    "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
    "label": "Customer",
    "options": "Customer"
+  },
+  {
+   "fieldname": "qty",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
+   "label": "Qty"
+  },
+  {
+   "fieldname": "rate",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
+   "label": "Rate"
+  },
+  {
+   "fieldname": "amount",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
+   "label": "Amount"
+  },
+  {
+   "fieldname": "days",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
+   "label": "Days"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2023-06-06 01:31:35.050821",
+ "modified": "2023-06-06 02:43:26.580337",
  "modified_by": "Administrator",
  "module": "Property Management",
  "name": "Customers",

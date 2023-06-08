@@ -1,6 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
+ "autoname": "CAL.#####",
  "creation": "2023-06-06 01:22:11.582186",
  "default_view": "List",
  "doctype": "DocType",
@@ -86,10 +87,11 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2023-06-06 01:23:49.078349",
+ "modified": "2023-06-06 02:24:13.329455",
  "modified_by": "Administrator",
  "module": "Property Management",
  "name": "Customer Activity Log",
+ "naming_rule": "Expression (old style)",
  "owner": "Administrator",
  "permissions": [
   {
