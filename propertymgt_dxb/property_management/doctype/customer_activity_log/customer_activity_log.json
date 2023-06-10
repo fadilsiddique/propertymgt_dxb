@@ -15,9 +15,8 @@
   "activity_type",
   "check_in_date",
   "check_out_date",
-  "from",
-  "to",
-  "amended_from"
+  "vacation_from",
+  "to"
  ],
  "fields": [
   {
@@ -64,30 +63,21 @@
   },
   {
    "depends_on": "eval:doc.activity_type=='Vacation'",
-   "fieldname": "from",
+   "fieldname": "to",
    "fieldtype": "Date",
-   "label": "From"
+   "label": "Vacation To"
   },
   {
    "depends_on": "eval:doc.activity_type=='Vacation'",
-   "fieldname": "to",
+   "fieldname": "vacation_from",
    "fieldtype": "Date",
-   "label": "To"
-  },
-  {
-   "fieldname": "amended_from",
-   "fieldtype": "Link",
-   "label": "Amended From",
-   "no_copy": 1,
-   "options": "Customer Activity Log",
-   "print_hide": 1,
-   "read_only": 1
+   "label": "Vacation From"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2023-06-06 02:24:13.329455",
+ "modified": "2023-06-11 01:17:12.919878",
  "modified_by": "Administrator",
  "module": "Property Management",
  "name": "Customer Activity Log",

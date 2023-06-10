@@ -11,7 +11,8 @@
   "apartment",
   "flat_no",
   "room_no",
-  "sewa_bill_date",
+  "sewa_bill_from",
+  "sewa_bill_to",
   "bill_type",
   "sewa_amount",
   "electricity_amount",
@@ -84,11 +85,6 @@
    "options": "Customers"
   },
   {
-   "fieldname": "sewa_bill_date",
-   "fieldtype": "Date",
-   "label": "SEWA Bill Date"
-  },
-  {
    "fieldname": "total_days_of_occupancy",
    "fieldtype": "Data",
    "label": "Total Days Of Occupancy"
@@ -101,12 +97,22 @@
    "options": "Room Bill",
    "print_hide": 1,
    "read_only": 1
+  },
+  {
+   "fieldname": "sewa_bill_to",
+   "fieldtype": "Date",
+   "label": "SEWA Bill To"
+  },
+  {
+   "fieldname": "sewa_bill_from",
+   "fieldtype": "Date",
+   "label": "SEWA Bill From"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2023-06-08 16:22:22.783497",
+ "modified": "2023-06-09 18:21:45.952053",
  "modified_by": "Administrator",
  "module": "Property Management",
  "name": "Room Bill",
