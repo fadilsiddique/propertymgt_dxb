@@ -2,9 +2,32 @@
 // For license information, please see license.txt
 
 frappe.ui.form.on('Room Bill', {
-	// refresh: function(frm) {
+	refresh: function(frm) {
 
-	// }
+		frm.add_custom_button(__('Sales Invoice'),function(){
+
+			frappe.call({
+				method:'propertymgt_dxb.property_management.api.rental.make_sales_invoice',
+				args:{
+					apartment:frm.doc.apartment,
+					flat:frm.doc.flat_no,
+					sewa:frm.doc.customers,
+					electricity:frm.doc.electricity_bill_table,
+					gas:frm.doc.gas_bill_table,
+					water:frm.doc.water_bill_table,
+					internet:frm.doc.internet_bill_table,
+					reference:frm.doc.name ? frm.doc.name : ''
+
+				},
+				callback:((response)=>{
+					console.log(response)
+				})
+			})
+		
+			frappe.set_route('List','Sales Invoice','List')
+		}, __('Create'))
+
+	},
 	apartment: function(frm){
 		let apartment = frm.doc.apartment
 
@@ -45,10 +68,27 @@ frappe.ui.form.on('Room Bill', {
 						let row =frm.add_child('customers',{
 							customer:e,
 						})
+
+						let electricity_bill_table = frm.add_child('electricity_bill_table',{
+							customer:e
+						})
+						let water_bill_table = frm.add_child('water_bill_table',{
+							customer:e
+						})
+						let gas_bill_table = frm.add_child('gas_bill_table',{
+							customer:e
+						})
+						let internet_bill_table = frm.add_child('internet_bill_table',{
+							customer:e
+						})
 					})
 
 				}
 				frm.refresh_field('customers')
+				frm.refresh_field('electricity_bill_table')
+				frm.refresh_field('water_bill_table')
+				frm.refresh_field('gas_bill_table')
+				frm.refresh_field('internet_bill_table')
 				
 
 			})
@@ -105,7 +145,7 @@ frappe.ui.form.on('Room Bill', {
 		
 	},
 	electricity_amount: function(frm){
-		let customers = frm.doc.customers
+		let customers = frm.doc.electricity_bill_table
 		let sewa_bill_from = frm.doc.sewa_bill_from
 		let sewa_bill_to = frm.doc.sewa_bill_to
 		let electricity_amount = frm.doc.electricity_amount
@@ -131,7 +171,7 @@ frappe.ui.form.on('Room Bill', {
 				frm.set_value('total_days_of_occupancy',response.message[1])
 				const rate = frm.doc.electricity_amount/frm.doc.total_days_of_occupancy
 				res.map((e)=>{
-					var customers_child = frm.doc.customers
+					var customers_child = frm.doc.electricity_bill_table
 					for (var i = 0; i < customers_child.length; i++){
 						var row = customers_child[i]
 						if(e.customer == row.customer){
@@ -153,7 +193,7 @@ frappe.ui.form.on('Room Bill', {
 		
 	},
 	water_amount: function(frm){
-		let customers = frm.doc.customers
+		let customers = frm.doc.water_bill_table
 		let sewa_bill_from = frm.doc.sewa_bill_from
 		let sewa_bill_to = frm.doc.sewa_bill_to
 		let water_amount = frm.doc.water_amount
@@ -179,7 +219,7 @@ frappe.ui.form.on('Room Bill', {
 				frm.set_value('total_days_of_occupancy',response.message[1])
 				const rate = frm.doc.water_amount/frm.doc.total_days_of_occupancy
 				res.map((e)=>{
-					var customers_child = frm.doc.customers
+					var customers_child = frm.doc.water_bill_table
 					for (var i = 0; i < customers_child.length; i++){
 						var row = customers_child[i]
 						if(e.customer == row.customer){
@@ -201,7 +241,7 @@ frappe.ui.form.on('Room Bill', {
 		
 	},
 	gas_amount: function(frm){
-		let customers = frm.doc.customers
+		let customers = frm.doc.gas_bill_table
 		let sewa_bill_from = frm.doc.sewa_bill_from
 		let sewa_bill_to=frm.doc.sewa_bill_to
 		let gas_amount = frm.doc.gas_amount
@@ -227,7 +267,7 @@ frappe.ui.form.on('Room Bill', {
 				frm.set_value('total_days_of_occupancy',response.message[1])
 				const rate = frm.doc.gas_amount/frm.doc.total_days_of_occupancy
 				res.map((e)=>{
-					var customers_child = frm.doc.customers
+					var customers_child = frm.doc.gas_bill_table
 					for (var i = 0; i < customers_child.length; i++){
 						var row = customers_child[i]
 						if(e.customer == row.customer){
@@ -249,7 +289,7 @@ frappe.ui.form.on('Room Bill', {
 	},
 
 	internet_amount: function(frm){
-		let customers = frm.doc.customers
+		let customers = frm.doc.internet_bill_table
 		let amount = frm.doc.internet_amount
 		let rate = amount/customers.length
 
