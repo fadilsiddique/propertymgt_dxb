@@ -4,7 +4,7 @@
 frappe.ui.form.on('Room', {
 	// refresh: function(frm) {
 
-	// }
+	// },
 
 	apartment: function(frm){
 		let apartment = frm.doc.apartment
