@@ -15,7 +15,7 @@ def get_customers_by_flat(flat_no):
         room_no = room.room_no
         room_numbers.append(room_no)
 
-    for room_number in room_numbers:
+    for room_number in room_numbers: 
         get_room = frappe.get_doc('Room',room_number)
         
         for tenant in get_room.tenants:
@@ -85,8 +85,10 @@ def calculate_days(customers,sewa_bill_from,sewa_bill_to,amount,apartment,flat):
                 print(vacation_exist)
                 ## if multiple vacation use frappe.db.get_list -> add vacations and reduce from num days
                 vacation = frappe.get_doc('Customer Activity Log',vacation_exist)
-                vacation_start_date = vacation.vacation_from
-                vacation_end_date = vacation.to
+                vacation_from_date = str(vacation.vacation_from)
+                vacation_to_date = str(vacation.to)
+                vacation_start_date = datetime.strptime(vacation_from_date,date_format)
+                vacation_end_date = datetime.strptime(vacation_to_date,date_format)
                 total_vacation_days = ((end_date-vacation_start_date).days) if vacation_end_date > end_date else(vacation_end_date - vacation_start_date).days 
                 num_days=((end_date - start_date).days) - total_vacation_days
 
@@ -116,8 +118,10 @@ def calculate_days(customers,sewa_bill_from,sewa_bill_to,amount,apartment,flat):
             if vacation_exist:
                 ## if multiple vacation use frappe.db.get_list -> add vacations and reduce from num days
                 vacation = frappe.get_doc('Customer Activity Log',vacation_exist)
-                vacation_start_date = vacation.vacation_from
-                vacation_end_date = vacation.to
+                vacation_from_date = str(vacation.vacation_from)
+                vacation_to_date = str(vacation.to)
+                vacation_start_date = datetime.strptime(vacation_from_date,date_format)
+                vacation_end_date = datetime.strptime(vacation_to_date,date_format)
                 total_vacation_days = (vacation_end_date - vacation_start_date).days
                 num_days=((end_date - start_date).days) - total_vacation_days
 
@@ -142,8 +146,10 @@ def calculate_days(customers,sewa_bill_from,sewa_bill_to,amount,apartment,flat):
             if vacation_exist:
                 ## if multiple vacation use frappe.db.get_list -> add vacations and reduce from num days
                 vacation = frappe.get_doc('Customer Activity Log',vacation_exist)
-                vacation_start_date = vacation.vacation_from
-                vacation_end_date = vacation.to
+                vacation_from_date = str(vacation.vacation_from)
+                vacation_to_date = str(vacation.to)
+                vacation_start_date = datetime.strptime(vacation_from_date,date_format)
+                vacation_end_date = datetime.strptime(vacation_to_date,date_format)
                 total_vacation_days = (vacation_end_date - vacation_start_date).days
                 num_days=((end_date - start_date).days) - total_vacation_days
 
@@ -165,8 +171,10 @@ def calculate_days(customers,sewa_bill_from,sewa_bill_to,amount,apartment,flat):
             if vacation_exist:
                 ## if multiple vacation use frappe.db.get_list -> add vacations and reduce from num days
                 vacation = frappe.get_doc('Customer Activity Log',vacation_exist)
-                vacation_start_date = vacation.vacation_from
-                vacation_end_date = vacation.to
+                vacation_from_date = str(vacation.vacation_from)
+                vacation_to_date = str(vacation.to)
+                vacation_start_date = datetime.strptime(vacation_from_date,date_format)
+                vacation_end_date = datetime.strptime(vacation_to_date,date_format)
                 total_vacation_days = (vacation_end_date - vacation_start_date).days
                 num_days=((end_date - start_date).days) - total_vacation_days
 
@@ -181,3 +189,63 @@ def calculate_days(customers,sewa_bill_from,sewa_bill_to,amount,apartment,flat):
     total_days = sum(item['days'] for item in data)
 
     return data, total_days
+#TO DO -> put invoicing function in que for better perfomance
+@frappe.whitelist()
+
+def make_sales_invoice(apartment,flat,sewa,electricity,gas,water,internet):
+
+    customers= ast.literal_eval(sewa)
+    electricity=ast.literal_eval(electricity)
+    gas=ast.literal_eval(gas)
+    water=ast.literal_eval(water)
+    internet=ast.literal_eval(internet)
+    tenants =[]
+
+    for customer in customers:
+        tenants.append(customer['customer'])
+
+    for tenant in tenants:
+        filtered_electricity = [item for item in electricity if item['customer'] == tenant]
+        filtered_water = [item for item in water if item['customer'] == tenant]
+        filtered_gas = [item for item in gas if item['customer'] == tenant]
+        filtered_internet = [item for item in internet if item['customer'] == tenant]
+
+        # print(filtered_electricity)
+
+        total_sewa = 0
+        total_internet =0
+
+        for item in filtered_electricity:
+            total_sewa +=item['amount']
+        
+        for item in filtered_gas:
+            total_sewa +=item['amount']
+
+        for item in filtered_water:
+            total_sewa += item['amount']
+        for item in filtered_internet:
+            total_internet +=item['amount']
+
+        new_invoice = frappe.get_doc({
+            'doctype': 'Sales Invoice',
+            'customer':tenant,
+            'items':[
+                {
+                    'item_code':'SEWA',
+                    'rate':total_sewa,
+                    'qty':1
+                },
+                {
+                    'item_code':'DATA',
+                    'rate':total_internet,
+                    'qty':1
+                }
+            ]
+        })
+
+
+        new_invoice.insert(ignore_permissions=True)
+
+        # tenants.append(total_sewa)
+        # print(total_sewa)
+    
