@@ -1,0 +1,91 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2023-06-15 13:20:25.101534",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "customer",
+  "room",
+  "ac_usage_amount",
+  "section_break_yapfn",
+  "days",
+  "rate_w0_ac",
+  "amount_wo_ac",
+  "total_with_ac"
+ ],
+ "fields": [
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
+   "label": "Customer",
+   "options": "Customer"
+  },
+  {
+   "fieldname": "room",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
+   "label": "Room",
+   "options": "Room"
+  },
+  {
+   "fieldname": "ac_usage_amount",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
+   "label": "AC Usage Amount"
+  },
+  {
+   "fieldname": "section_break_yapfn",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "days",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
+   "label": "Days"
+  },
+  {
+   "fieldname": "rate_w0_ac",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
+   "label": "Rate (W/O AC)"
+  },
+  {
+   "fieldname": "amount_wo_ac",
+   "fieldtype": "Data",
+   "label": "Amount (W/O AC)"
+  },
+  {
+   "fieldname": "total_with_ac",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_preview": 1,
+   "in_standard_filter": 1,
+   "label": "Total (With AC)"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2023-06-15 13:23:29.907908",
+ "modified_by": "Administrator",
+ "module": "Property Management",
+ "name": "Electricity Usage",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

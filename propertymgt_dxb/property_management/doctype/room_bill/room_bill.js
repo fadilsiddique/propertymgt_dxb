@@ -65,13 +65,22 @@ frappe.ui.form.on('Room Bill', {
 				if (customers){
 
 					customers.map((e)=>{
+						frappe.db.get_list('Customer',{filters:{'name':e},fields:['name','room']})
+						.then(function(event){
+							console.log(event)
+							let room = event[0]['room']
+							console.log(room)
+							let electricity_bill_table = frm.add_child('electricity_usage_table',{
+								customer:e,
+								room:room
+							})
+
+							frm.refresh_field('electricity_usage_table')
+						})
 						let row =frm.add_child('customers',{
 							customer:e,
 						})
 
-						let electricity_bill_table = frm.add_child('electricity_bill_table',{
-							customer:e
-						})
 						let water_bill_table = frm.add_child('water_bill_table',{
 							customer:e
 						})
@@ -85,7 +94,7 @@ frappe.ui.form.on('Room Bill', {
 
 				}
 				frm.refresh_field('customers')
-				frm.refresh_field('electricity_bill_table')
+				frm.refresh_field('electricity_usage_table')
 				frm.refresh_field('water_bill_table')
 				frm.refresh_field('gas_bill_table')
 				frm.refresh_field('internet_bill_table')
@@ -145,7 +154,7 @@ frappe.ui.form.on('Room Bill', {
 		
 	},
 	electricity_amount: function(frm){
-		let customers = frm.doc.electricity_bill_table
+		let customers = frm.doc.electricity_usage_table
 		let sewa_bill_from = frm.doc.sewa_bill_from
 		let sewa_bill_to = frm.doc.sewa_bill_to
 		let electricity_amount = frm.doc.electricity_amount
@@ -154,6 +163,20 @@ frappe.ui.form.on('Room Bill', {
 		// customers.map((res)=>{
 		// 	customers_array.push(res.customer)
 		// })
+
+		frappe.db.get_list('Room',{filters:
+			{'flat_no':frm.doc.flat_no}})
+			.then((e)=>{
+			
+			e.map((res)=>{
+
+				let ac_usage_table = frm.add_child('room_wise_ac_usage',{
+					room:res.name
+				})
+
+			})
+			frm.refresh_field('room_wise_ac_usage')
+		})
 
 		frappe.call({
 			method:"propertymgt_dxb.property_management.api.rental.calculate_days",
@@ -171,7 +194,7 @@ frappe.ui.form.on('Room Bill', {
 				frm.set_value('total_days_of_occupancy',response.message[1])
 				const rate = frm.doc.electricity_amount/frm.doc.total_days_of_occupancy
 				res.map((e)=>{
-					var customers_child = frm.doc.electricity_bill_table
+					var customers_child = frm.doc.electricity_usage_table
 					for (var i = 0; i < customers_child.length; i++){
 						var row = customers_child[i]
 						if(e.customer == row.customer){
@@ -180,7 +203,6 @@ frappe.ui.form.on('Room Bill', {
 
 							let amount = row.rate * row.days
 							frappe.model.set_value(row.doctype,row.name,'amount',amount)
-							
 						}
 						
 					}
@@ -299,13 +321,76 @@ frappe.ui.form.on('Room Bill', {
 			frappe.model.set_value(row.doctype,row.name,'amount',rate)
 		}
 
+	},
+	total_electricity_amount_without_ac: function(frm){
+
+		let rate_without_ac = (frm.doc.total_electricity_amount_without_ac/frm.doc.total_days_of_occupancy)
+		let electricity_table = frm.doc.electricity_usage_table
+		
+
+		for (var i = 0; i < electricity_table.length; i++){
+			var row = electricity_table[i]
+			let ac_usage_table = frm.doc.room_wise_ac_usage
+			frappe.model.set_value(row.doctype,row.name,'rate_w0_ac',rate_without_ac)
+			
+			let amount_without_ac = row.rate_w0_ac * row.days
+			frappe.model.set_value(row.doctype,row.name,'amount_wo_ac',amount_without_ac)
+
+			ac_usage_table.map((event)=>{
+				if (row.room == event.room){
+					let ac_usage_rate = (event.amount/frm.doc.total_days_of_occupancy)
+					let ac_usage_amount = (ac_usage_rate*row.days)
+					frappe.model.set_value(row.doctype,row.name,'ac_usage_amount', ac_usage_amount)
+					frappe.model.set_value(row.doctype,row.name,'total_with_ac',(row.amount_wo_ac + ac_usage_amount))			
+				}
+			})
+
+
+		}
+
+
 	}
+
 });
 
 
 
-// frappe.ui.form.on('Customers', {
-// 	// refresh: function(frm) {
 
-// 	// }
-// }); 
+
+
+frappe.ui.form.on('Room Electricity Usage', {
+	// refresh: function(frm) {
+
+	// }
+
+	ac_usage: function(frm,cdt,cdn){
+		let room = locals[cdt][cdn]
+		let sum = 0
+		let amount = (room.ac_usage)*room.electricity_rateunit
+		frappe.model.set_value(cdt,cdn, 'amount',amount)
+		frm.doc.room_wise_ac_usage.map((e)=>{
+			sum += e.amount
+		})
+		let amount_without_ac = frm.doc.total_electricity_amount_without_ac
+		let total_electricity_amount = frm.doc.electricity_amount
+
+		frm.set_value('total_electricity_amount_without_ac',(total_electricity_amount - sum))
+
+	}
+}); 
+
+// frappe.ui.form.on('Electricity Usage',{
+// 	customer_on_form_rendered: function(frm,cdt,cdn){
+// 		let row = locals[cdt][cdn]
+// 		console.log(row)
+
+// 		let customer=row.customer
+// 		console.log(customer)
+
+// 		frappe.db.get_list('Customer',{filters:{'name':customer},fields:['room']}).then((res)=>{
+// 			console.log(res)
+// 			frm.model.set_value(cdt,cdn,'room',res[0]['room'])
+// 		})
+
+// 	}
+// })

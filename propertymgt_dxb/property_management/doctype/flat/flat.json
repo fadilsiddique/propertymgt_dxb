@@ -63,8 +63,25 @@
   }
  ],
  "index_web_pages_for_search": 1,
- "links": [],
- "modified": "2023-06-06 02:21:21.554798",
+ "links": [
+  {
+   "link_doctype": "Room Bill",
+   "link_fieldname": "flat_no"
+  },
+  {
+   "link_doctype": "Room",
+   "link_fieldname": "flat_no"
+  },
+  {
+   "link_doctype": "Customer",
+   "link_fieldname": "flat"
+  },
+  {
+   "link_doctype": "Customer Activity Log",
+   "link_fieldname": "flat_no"
+  }
+ ],
+ "modified": "2023-06-13 13:25:57.466078",
  "modified_by": "Administrator",
  "module": "Property Management",
  "name": "Flat",

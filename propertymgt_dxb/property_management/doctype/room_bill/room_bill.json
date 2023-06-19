@@ -27,6 +27,9 @@
   "internet_bill_table",
   "electricity_bill_section",
   "electricity_amount",
+  "room_wise_ac_usage",
+  "total_electricity_amount_without_ac",
+  "electricity_usage_table",
   "electricity_bill_table",
   "section_break_tehpv",
   "total_days_of_occupancy",
@@ -53,7 +56,7 @@
   {
    "fieldname": "electricity_amount",
    "fieldtype": "Float",
-   "label": "Electricity Amount"
+   "label": "Total Electricity Amount"
   },
   {
    "fieldname": "water_amount",
@@ -157,12 +160,29 @@
    "options": "Room Bill",
    "print_hide": 1,
    "read_only": 1
+  },
+  {
+   "fieldname": "room_wise_ac_usage",
+   "fieldtype": "Table",
+   "label": "Room Wise AC Usage",
+   "options": "Room Electricity Usage"
+  },
+  {
+   "fieldname": "electricity_usage_table",
+   "fieldtype": "Table",
+   "label": "Electricity Usage Table",
+   "options": "Electricity Usage"
+  },
+  {
+   "fieldname": "total_electricity_amount_without_ac",
+   "fieldtype": "Float",
+   "label": "Total Electricity Amount Without AC"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2023-06-12 15:27:36.116999",
+ "modified": "2023-06-19 17:44:46.973033",
  "modified_by": "Administrator",
  "module": "Property Management",
  "name": "Room Bill",

@@ -23,6 +23,10 @@ def get_customers_by_flat(flat_no):
 
     return customers
 
+@frappe.whitelist()
+def get_rooms(flat):
+    pass
+
 
 @frappe.whitelist(allow_guest=True)
 def calculate_days(customers,sewa_bill_from,sewa_bill_to,amount,apartment,flat):
@@ -82,7 +86,6 @@ def calculate_days(customers,sewa_bill_from,sewa_bill_to,amount,apartment,flat):
             end_date = datetime.strptime(sewa_bill_to, date_format)
 
             if vacation_exist:
-                print(vacation_exist)
                 ## if multiple vacation use frappe.db.get_list -> add vacations and reduce from num days
                 vacation = frappe.get_doc('Customer Activity Log',vacation_exist)
                 vacation_from_date = str(vacation.vacation_from)
@@ -190,9 +193,21 @@ def calculate_days(customers,sewa_bill_from,sewa_bill_to,amount,apartment,flat):
 
     return data, total_days
 #TO DO -> put invoicing function in que for better perfomance
-@frappe.whitelist()
 
-def make_sales_invoice(apartment,flat,sewa,electricity,gas,water,internet):
+# def invoice_queue(apartment,flat,sewa,electricity,gas,water,internet,reference):
+#     frappe.enqueue(
+#         make_sales_invoice,
+#         queue='default',
+#         apartment=apartment,
+#         flat=flat,
+#         sewa=sewa,
+#         electricity=electricity,
+#         gas=gas,
+#         water=water,
+#         internet=internet,reference=reference
+#     )
+@frappe.whitelist()
+def make_sales_invoice(apartment,flat,sewa,electricity,gas,water,internet,reference):
 
     customers= ast.literal_eval(sewa)
     electricity=ast.literal_eval(electricity)
@@ -205,6 +220,10 @@ def make_sales_invoice(apartment,flat,sewa,electricity,gas,water,internet):
         tenants.append(customer['customer'])
 
     for tenant in tenants:
+
+        customer = frappe.get_doc('Customer',tenant)
+        rate= customer.rent_amount
+
         filtered_electricity = [item for item in electricity if item['customer'] == tenant]
         filtered_water = [item for item in water if item['customer'] == tenant]
         filtered_gas = [item for item in gas if item['customer'] == tenant]
@@ -229,6 +248,7 @@ def make_sales_invoice(apartment,flat,sewa,electricity,gas,water,internet):
         new_invoice = frappe.get_doc({
             'doctype': 'Sales Invoice',
             'customer':tenant,
+            'room_bill_reference_id':reference if reference else "",
             'items':[
                 {
                     'item_code':'SEWA',
@@ -239,13 +259,15 @@ def make_sales_invoice(apartment,flat,sewa,electricity,gas,water,internet):
                     'item_code':'DATA',
                     'rate':total_internet,
                     'qty':1
+                },
+                {
+                    'item_code':customer.service_type,
+                    'rate':rate,
+                    'qty':1
                 }
             ]
         })
 
-
         new_invoice.insert(ignore_permissions=True)
 
-        # tenants.append(total_sewa)
-        # print(total_sewa)
     
