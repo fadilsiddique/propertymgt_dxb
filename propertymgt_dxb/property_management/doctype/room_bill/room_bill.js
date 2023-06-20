@@ -12,12 +12,11 @@ frappe.ui.form.on('Room Bill', {
 					apartment:frm.doc.apartment,
 					flat:frm.doc.flat_no,
 					sewa:frm.doc.customers,
-					electricity:frm.doc.electricity_bill_table,
+					electricity:frm.doc.electricity_usage_table,
 					gas:frm.doc.gas_bill_table,
 					water:frm.doc.water_bill_table,
 					internet:frm.doc.internet_bill_table,
 					reference:frm.doc.name ? frm.doc.name : ''
-
 				},
 				callback:((response)=>{
 					console.log(response)
@@ -111,7 +110,7 @@ frappe.ui.form.on('Room Bill', {
 		let sewa_amount = frm.doc.sewa_amount
 		let customers_array = []
 
-		console.log(customers)
+		console.log(frm)
 
 		// customers.map((res)=>{
 		// 	customers_array.push(res.customer)
@@ -344,11 +343,7 @@ frappe.ui.form.on('Room Bill', {
 					frappe.model.set_value(row.doctype,row.name,'total_with_ac',(row.amount_wo_ac + ac_usage_amount))			
 				}
 			})
-
-
 		}
-
-
 	}
 
 });

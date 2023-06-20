@@ -15,7 +15,8 @@
   "no_of_rooms",
   "maximum_number_of_tenants",
   "no_of_available_bed_space",
-  "rooms"
+  "rooms",
+  "cost_center"
  ],
  "fields": [
   {
@@ -60,6 +61,12 @@
    "fieldtype": "Table",
    "label": "Rooms",
    "options": "Rooms"
+  },
+  {
+   "fieldname": "cost_center",
+   "fieldtype": "Link",
+   "label": "Cost Center",
+   "options": "Cost Center"
   }
  ],
  "index_web_pages_for_search": 1,
@@ -81,7 +88,7 @@
    "link_fieldname": "flat_no"
   }
  ],
- "modified": "2023-06-13 13:25:57.466078",
+ "modified": "2023-06-20 19:01:43.908560",
  "modified_by": "Administrator",
  "module": "Property Management",
  "name": "Flat",

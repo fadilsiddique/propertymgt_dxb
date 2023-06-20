@@ -8,25 +8,16 @@ def get_customers_by_flat(flat_no):
 
     room_numbers=[]
     customers = []
-    flat = frappe.get_doc('Flat',flat_no)
-    rooms = flat.rooms
+    tenants = frappe.db.get_list('Customer',filters={
+        'flat':flat_no
+    },
+    fields=['name','flat']
+    )
 
-    for room in rooms:
-        room_no = room.room_no
-        room_numbers.append(room_no)
-
-    for room_number in room_numbers: 
-        get_room = frappe.get_doc('Room',room_number)
+    for tenant in tenants:
+        customers.append(tenant.name)
         
-        for tenant in get_room.tenants:
-            customers.append(tenant.customer)
-
     return customers
-
-@frappe.whitelist()
-def get_rooms(flat):
-    pass
-
 
 @frappe.whitelist(allow_guest=True)
 def calculate_days(customers,sewa_bill_from,sewa_bill_to,amount,apartment,flat):
@@ -49,7 +40,6 @@ def calculate_days(customers,sewa_bill_from,sewa_bill_to,amount,apartment,flat):
 
             }
         )
-
         check_out_exist = frappe.db.exists(
             "Customer Activity Log",{
                 'customer':customer['customer'],
@@ -60,7 +50,6 @@ def calculate_days(customers,sewa_bill_from,sewa_bill_to,amount,apartment,flat):
 
             }
         )
-
         vacation_exist = frappe.db.exists(
             "Customer Activity Log",{
                 'customer':customer['customer'],
@@ -71,12 +60,11 @@ def calculate_days(customers,sewa_bill_from,sewa_bill_to,amount,apartment,flat):
 
             }
         )
-
         if check_in_exist and not check_out_exist:
+            
             check_in = frappe.get_doc(
                 'Customer Activity Log',check_in_exist
             )
-
             check_in_date = str(check_in.check_in_date)
             sewa_bill_from = str(sewa_bill_from)
             sewa_bill_to = str(sewa_bill_to)
@@ -97,13 +85,14 @@ def calculate_days(customers,sewa_bill_from,sewa_bill_to,amount,apartment,flat):
 
             else:
                 num_days=(end_date - start_date).days
-
+    
             data.append({
                 'customer':customer['customer'],
                 'days':num_days
             })
 
         elif check_in_exist and check_out_exist:
+        
             check_in = frappe.get_doc(
                 'Customer Activity Log',check_in_exist
             )
@@ -137,8 +126,9 @@ def calculate_days(customers,sewa_bill_from,sewa_bill_to,amount,apartment,flat):
             })
 
         elif not check_in_exist and check_out_exist:
+            
             check_out = frappe.get_doc(
-                'Customer Activity Log',check_in_exist
+                'Customer Activity Log',check_out_exist
             )
             check_out_date = str(check_out.check_out_date)
             sewa_bill_from = str(sewa_bill_from)
@@ -229,13 +219,12 @@ def make_sales_invoice(apartment,flat,sewa,electricity,gas,water,internet,refere
         filtered_gas = [item for item in gas if item['customer'] == tenant]
         filtered_internet = [item for item in internet if item['customer'] == tenant]
 
-        # print(filtered_electricity)
 
         total_sewa = 0
         total_internet =0
 
         for item in filtered_electricity:
-            total_sewa +=item['amount']
+            total_sewa +=float(item['total_with_ac'])
         
         for item in filtered_gas:
             total_sewa +=item['amount']
@@ -244,6 +233,7 @@ def make_sales_invoice(apartment,flat,sewa,electricity,gas,water,internet,refere
             total_sewa += item['amount']
         for item in filtered_internet:
             total_internet +=item['amount']
+
 
         new_invoice = frappe.get_doc({
             'doctype': 'Sales Invoice',

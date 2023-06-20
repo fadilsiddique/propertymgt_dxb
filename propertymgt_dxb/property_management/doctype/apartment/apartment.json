@@ -15,7 +15,8 @@
   "emirate",
   "country",
   "postal_code",
-  "flats"
+  "flats",
+  "cost_center"
  ],
  "fields": [
   {
@@ -62,11 +63,17 @@
    "fieldtype": "Table",
    "label": "Flats",
    "options": "Flats"
+  },
+  {
+   "fieldname": "cost_center",
+   "fieldtype": "Link",
+   "label": "Cost Center",
+   "options": "Cost Center"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-06-06 02:26:35.434809",
+ "modified": "2023-06-20 19:01:16.633298",
  "modified_by": "Administrator",
  "module": "Property Management",
  "name": "Apartment",
