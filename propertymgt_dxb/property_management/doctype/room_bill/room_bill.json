@@ -30,10 +30,8 @@
   "room_wise_ac_usage",
   "total_electricity_amount_without_ac",
   "electricity_usage_table",
-  "electricity_bill_table",
   "section_break_tehpv",
-  "total_days_of_occupancy",
-  "amended_from"
+  "total_days_of_occupancy"
  ],
  "fields": [
   {
@@ -95,12 +93,6 @@
    "label": "SEWA Bill From"
   },
   {
-   "fieldname": "electricity_bill_table",
-   "fieldtype": "Table",
-   "label": "Electricity Bill Table",
-   "options": "Customers"
-  },
-  {
    "fieldname": "residence_details_section",
    "fieldtype": "Section Break",
    "label": "Residence Details"
@@ -153,15 +145,6 @@
    "fieldtype": "Section Break"
   },
   {
-   "fieldname": "amended_from",
-   "fieldtype": "Link",
-   "label": "Amended From",
-   "no_copy": 1,
-   "options": "Room Bill",
-   "print_hide": 1,
-   "read_only": 1
-  },
-  {
    "fieldname": "room_wise_ac_usage",
    "fieldtype": "Table",
    "label": "Room Wise AC Usage",
@@ -170,7 +153,7 @@
   {
    "fieldname": "electricity_usage_table",
    "fieldtype": "Table",
-   "label": "Electricity Usage Table",
+   "label": "Electricity Bill Table",
    "options": "Electricity Usage"
   },
   {
@@ -182,7 +165,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2023-06-19 17:44:46.973033",
+ "modified": "2023-06-25 02:09:19.507586",
  "modified_by": "Administrator",
  "module": "Property Management",
  "name": "Room Bill",

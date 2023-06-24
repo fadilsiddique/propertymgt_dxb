@@ -134,7 +134,7 @@ def calculate_days(customers,sewa_bill_from,sewa_bill_to,amount,apartment,flat):
             sewa_bill_from = str(sewa_bill_from)
             date_format = "%Y-%m-%d"
             start_date = datetime.strptime(sewa_bill_from, date_format)
-            end_date = datetime.strptime(check_out_date, date_format)
+            end_date = datetime.strptime(check_out_date, date_format) 
 
             if vacation_exist:
                 ## if multiple vacation use frappe.db.get_list -> add vacations and reduce from num days
