@@ -19,3 +19,13 @@ class Flat(Document):
 		new_cost_center.save(ignore_permissions=True)
 
 		frappe.db.set_value('Flat',self.name,'cost_center',new_cost_center.name)
+
+		apartment = frappe.get_doc('Apartment',self.apartment)
+
+		apartment.append("flats",{
+			"flat":self.name
+		})
+		apartment.save()
+
+
+	
