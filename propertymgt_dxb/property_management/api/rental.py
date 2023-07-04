@@ -8,8 +8,10 @@ def get_customers_by_flat(flat_no):
 
     room_numbers=[]
     customers = []
+    ##add filter staus=in
     tenants = frappe.db.get_list('Customer',filters={
-        'flat':flat_no
+        'flat':flat_no,
+        'current_status': 'In' or 'Vacation' or ''
     },
     fields=['name','flat']
     )
@@ -33,7 +35,7 @@ def calculate_days(customers,sewa_bill_from,sewa_bill_to,amount,apartment,flat):
         check_in_exist=frappe.db.exists(
             "Customer Activity Log",{
                 'customer':customer['customer'],
-                'activity_type':'Check-In',
+                'activity_type':'In',
                 'apartment':apartment,
                 'flat_no':flat,
                 'check_in_date':['between',[sewa_bill_from,sewa_bill_to]]
@@ -43,7 +45,7 @@ def calculate_days(customers,sewa_bill_from,sewa_bill_to,amount,apartment,flat):
         check_out_exist = frappe.db.exists(
             "Customer Activity Log",{
                 'customer':customer['customer'],
-                'activity_type':'Check-Out',
+                'activity_type':'Out',
                 'apartment':apartment,
                 'flat_no':flat,
                 'check_out_date':['between',[sewa_bill_from,sewa_bill_to]]
@@ -259,5 +261,29 @@ def make_sales_invoice(apartment,flat,sewa,electricity,gas,water,internet,refere
         })
 
         new_invoice.insert(ignore_permissions=True)
+
+@frappe.whitelist()
+def make_room_bill(
+    apartment=None,
+    flat=None,
+    sewa_amount=None,
+    water_amount=None,
+    electricity_amount=None,
+    gas_amount=None
+):
+    room_bill = frappe.get_doc({
+        'doctype':'Room Bill',
+        'apartment':apartment,
+        'flat_no':flat,
+        'sewa_amount':sewa_amount,
+        'water_amount':water_amount,
+        'electricity_amount':electricity_amount,
+        'gas_amount':gas_amount
+    })
+
+    room_bill.insert(ignore_permissions=True)
+    room_bill.save(ignore_permissions=True)
+
+
 
     
