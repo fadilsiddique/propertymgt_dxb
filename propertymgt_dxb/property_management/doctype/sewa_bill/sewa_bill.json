@@ -1,0 +1,131 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:{flat}|{sewa_from}/{sewa_to}",
+ "creation": "2023-07-04 15:45:43.114492",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "apartment",
+  "flat",
+  "sewa_date_range_section",
+  "sewa_from",
+  "sewa_to",
+  "section_break_ww8ss",
+  "sewa_amount",
+  "section_break_9qbqw",
+  "gas_amount",
+  "column_break_qozgl",
+  "water_amount",
+  "column_break_2y9vj",
+  "electricity_amount",
+  "section_break_xyucz",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "apartment",
+   "fieldtype": "Link",
+   "label": "Apartment",
+   "options": "Apartment"
+  },
+  {
+   "fieldname": "flat",
+   "fieldtype": "Link",
+   "label": "Flat",
+   "options": "Flat"
+  },
+  {
+   "fieldname": "sewa_date_range_section",
+   "fieldtype": "Section Break",
+   "label": "SEWA Date Range"
+  },
+  {
+   "fieldname": "section_break_ww8ss",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "sewa_amount",
+   "fieldtype": "Float",
+   "label": "SEWA Amount"
+  },
+  {
+   "fieldname": "section_break_9qbqw",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "gas_amount",
+   "fieldtype": "Float",
+   "label": "Gas Amount"
+  },
+  {
+   "fieldname": "column_break_qozgl",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "water_amount",
+   "fieldtype": "Float",
+   "label": "Water Amount"
+  },
+  {
+   "fieldname": "column_break_2y9vj",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "electricity_amount",
+   "fieldtype": "Data",
+   "label": "Electricity Amount"
+  },
+  {
+   "fieldname": "section_break_xyucz",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "SEWA Bill",
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "sewa_from",
+   "fieldtype": "Date",
+   "label": "From"
+  },
+  {
+   "fieldname": "sewa_to",
+   "fieldtype": "Date",
+   "label": "To"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2023-07-04 16:02:33.922114",
+ "modified_by": "Administrator",
+ "module": "Property Management",
+ "name": "SEWA Bill",
+ "naming_rule": "Expression (old style)",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
