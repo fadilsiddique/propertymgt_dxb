@@ -54,13 +54,13 @@
    "options": "\nIn\nOut\nVacation"
   },
   {
-   "depends_on": "eval:doc.activity_type=='Check-In'",
+   "depends_on": "eval:doc.activity_type=='In'",
    "fieldname": "check_in_date",
    "fieldtype": "Date",
    "label": "Check In Date"
   },
   {
-   "depends_on": "eval:doc.activity_type=='Check-Out'",
+   "depends_on": "eval:doc.activity_type=='Out'",
    "fieldname": "check_out_date",
    "fieldtype": "Date",
    "label": "Check Out Date"
@@ -90,7 +90,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2023-07-04 15:17:29.320818",
+ "modified": "2023-07-05 01:54:18.979052",
  "modified_by": "Administrator",
  "module": "Property Management",
  "name": "Customer Activity Log",
