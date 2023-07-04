@@ -51,7 +51,7 @@
    "fieldname": "activity_type",
    "fieldtype": "Select",
    "label": "Activity Type",
-   "options": "\nCheck-In\nCheck-Out\nVacation"
+   "options": "\nIn\nOut\nVacation"
   },
   {
    "depends_on": "eval:doc.activity_type=='Check-In'",
@@ -90,7 +90,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2023-06-28 03:19:32.069866",
+ "modified": "2023-07-04 15:17:29.320818",
  "modified_by": "Administrator",
  "module": "Property Management",
  "name": "Customer Activity Log",
