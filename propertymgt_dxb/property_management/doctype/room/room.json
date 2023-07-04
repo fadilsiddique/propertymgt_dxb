@@ -11,7 +11,7 @@
   "apartment",
   "flat_no",
   "room_no",
-  "service_type",
+  "meter_number",
   "capacity",
   "available_bed_space",
   "tenants"
@@ -41,12 +41,6 @@
    "options": "\n1\n2\n3\n4"
   },
   {
-   "fieldname": "service_type",
-   "fieldtype": "Link",
-   "label": "Service Type",
-   "options": "Item"
-  },
-  {
    "fieldname": "available_bed_space",
    "fieldtype": "Data",
    "label": "Available Bed Space"
@@ -56,11 +50,16 @@
    "fieldtype": "Table",
    "label": "Tenants",
    "options": "Customers"
+  },
+  {
+   "fieldname": "meter_number",
+   "fieldtype": "Data",
+   "label": "Meter Number"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-06-08 20:19:31.040029",
+ "modified": "2023-07-04 10:31:58.769619",
  "modified_by": "Administrator",
  "module": "Property Management",
  "name": "Room",
