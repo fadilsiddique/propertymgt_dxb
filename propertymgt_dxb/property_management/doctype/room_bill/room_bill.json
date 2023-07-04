@@ -26,12 +26,23 @@
   "internet_amount",
   "internet_bill_table",
   "electricity_bill_section",
+  "current_electricity_reading",
+  "column_break_txmus",
+  "previous_electricity_reading",
+  "section_break_f4gkc",
+  "total_units_used",
+  "column_break_orvef",
+  "electricity_rate__unit",
+  "section_break_pfmes",
   "electricity_amount",
   "room_wise_ac_usage",
+  "balance_units",
   "total_electricity_amount_without_ac",
   "electricity_usage_table",
   "section_break_tehpv",
-  "total_days_of_occupancy"
+  "total_days_of_occupancy",
+  "sharjah_municipality_charges",
+  "amended_from"
  ],
  "fields": [
   {
@@ -99,7 +110,7 @@
   },
   {
    "fieldname": "section_break_kauxw",
-   "fieldtype": "Section Break",
+   "fieldtype": "Tab Break",
    "label": "SEWA Bill"
   },
   {
@@ -122,27 +133,28 @@
   },
   {
    "fieldname": "water_bill_section",
-   "fieldtype": "Section Break",
+   "fieldtype": "Tab Break",
    "label": "Water Bill"
   },
   {
    "fieldname": "gas_bill_section",
-   "fieldtype": "Section Break",
+   "fieldtype": "Tab Break",
    "label": "Gas Bill"
   },
   {
    "fieldname": "internet_bill_section",
-   "fieldtype": "Section Break",
+   "fieldtype": "Tab Break",
    "label": "Internet Bill"
   },
   {
    "fieldname": "electricity_bill_section",
-   "fieldtype": "Section Break",
+   "fieldtype": "Tab Break",
    "label": "Electricity Bill"
   },
   {
    "fieldname": "section_break_tehpv",
-   "fieldtype": "Section Break"
+   "fieldtype": "Tab Break",
+   "label": "Others"
   },
   {
    "fieldname": "room_wise_ac_usage",
@@ -160,12 +172,69 @@
    "fieldname": "total_electricity_amount_without_ac",
    "fieldtype": "Float",
    "label": "Total Electricity Amount Without AC"
+  },
+  {
+   "fieldname": "column_break_txmus",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "current_electricity_reading",
+   "fieldtype": "Int",
+   "label": "Current Electricity Reading (Unit)"
+  },
+  {
+   "fieldname": "section_break_pfmes",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "sharjah_municipality_charges",
+   "fieldtype": "Float",
+   "label": "Sharjah Municipality Charges "
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Room Bill",
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "balance_units",
+   "fieldtype": "Int",
+   "label": "Balance Units"
+  },
+  {
+   "fieldname": "total_units_used",
+   "fieldtype": "Int",
+   "label": "Total Units Used"
+  },
+  {
+   "fieldname": "section_break_f4gkc",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "previous_electricity_reading",
+   "fieldtype": "Int",
+   "label": "Previous Electricity Reading (Unit)",
+   "non_negative": 1
+  },
+  {
+   "fieldname": "column_break_orvef",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": ".30",
+   "fieldname": "electricity_rate__unit",
+   "fieldtype": "Float",
+   "label": "Electricity Rate / Unit"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2023-06-25 02:09:19.507586",
+ "modified": "2023-07-04 11:03:59.651592",
  "modified_by": "Administrator",
  "module": "Property Management",
  "name": "Room Bill",
