@@ -9,6 +9,7 @@
  "engine": "InnoDB",
  "field_order": [
   "residence_details_section",
+  "sewa_bill",
   "apartment",
   "flat_no",
   "section_break_kauxw",
@@ -46,12 +47,14 @@
  ],
  "fields": [
   {
+   "fetch_from": "sewa_bill.apartment",
    "fieldname": "apartment",
    "fieldtype": "Link",
    "label": "Apartment",
    "options": "Apartment"
   },
   {
+   "fetch_from": "sewa_bill.flat",
    "fieldname": "flat_no",
    "fieldtype": "Link",
    "label": "Flat No.",
@@ -94,11 +97,13 @@
    "label": "Total Days Of Occupancy"
   },
   {
+   "fetch_from": "sewa_bill.sewa_to",
    "fieldname": "sewa_bill_to",
    "fieldtype": "Date",
    "label": "SEWA Bill To"
   },
   {
+   "fetch_from": "sewa_bill.sewa_from",
    "fieldname": "sewa_bill_from",
    "fieldtype": "Date",
    "label": "SEWA Bill From"
@@ -179,7 +184,7 @@
   },
   {
    "fieldname": "current_electricity_reading",
-   "fieldtype": "Int",
+   "fieldtype": "Float",
    "label": "Current Electricity Reading (Unit)"
   },
   {
@@ -216,7 +221,7 @@
   },
   {
    "fieldname": "previous_electricity_reading",
-   "fieldtype": "Int",
+   "fieldtype": "Float",
    "label": "Previous Electricity Reading (Unit)",
    "non_negative": 1
   },
@@ -229,12 +234,19 @@
    "fieldname": "electricity_rate__unit",
    "fieldtype": "Float",
    "label": "Electricity Rate / Unit"
+  },
+  {
+   "description": "If you have already created sewa bill for a flat, select sewa bill from this link field to auto-fetch the values.",
+   "fieldname": "sewa_bill",
+   "fieldtype": "Link",
+   "label": "SEWA Bill (Optional)",
+   "options": "SEWA Bill"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2023-07-04 11:03:59.651592",
+ "modified": "2023-07-04 17:56:03.234341",
  "modified_by": "Administrator",
  "module": "Property Management",
  "name": "Room Bill",

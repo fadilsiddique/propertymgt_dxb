@@ -20,7 +20,10 @@
   "column_break_qozgl",
   "water_amount",
   "column_break_2y9vj",
-  "electricity_amount",
+  "current_electricity_reading",
+  "previous_electricity_reading",
+  "total_units_used",
+  "electricity_rateunit",
   "section_break_xyucz",
   "amended_from"
  ],
@@ -71,12 +74,7 @@
   },
   {
    "fieldname": "column_break_2y9vj",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "electricity_amount",
-   "fieldtype": "Data",
-   "label": "Electricity Amount"
+   "fieldtype": "Section Break"
   },
   {
    "fieldname": "section_break_xyucz",
@@ -100,12 +98,33 @@
    "fieldname": "sewa_to",
    "fieldtype": "Date",
    "label": "To"
+  },
+  {
+   "fieldname": "current_electricity_reading",
+   "fieldtype": "Float",
+   "label": "Current Electricity Reading"
+  },
+  {
+   "fieldname": "previous_electricity_reading",
+   "fieldtype": "Float",
+   "label": "Previous Electricity Reading"
+  },
+  {
+   "fieldname": "total_units_used",
+   "fieldtype": "Float",
+   "label": "Total Units Used"
+  },
+  {
+   "default": ".30",
+   "fieldname": "electricity_rateunit",
+   "fieldtype": "Float",
+   "label": "Electricity Rate/Unit"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2023-07-04 16:02:33.922114",
+ "modified": "2023-07-04 18:34:42.243115",
  "modified_by": "Administrator",
  "module": "Property Management",
  "name": "SEWA Bill",

@@ -1,6 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
+ "autoname": "format:{flat}|{sewa_from}-{sewa_to}",
  "creation": "2023-07-04 15:27:55.882302",
  "default_view": "List",
  "doctype": "DocType",
@@ -9,10 +10,9 @@
  "field_order": [
   "apartment",
   "flat",
-  "room",
   "sewa_date_range_column",
-  "from",
-  "to",
+  "sewa_from",
+  "sewa_to",
   "section_break_la7nx",
   "customers",
   "amended_from"
@@ -31,16 +31,10 @@
    "options": "Flat"
   },
   {
-   "fieldname": "room",
-   "fieldtype": "Link",
-   "label": "Room",
-   "options": "Room"
-  },
-  {
    "fieldname": "customers",
    "fieldtype": "Table",
    "label": "Customers",
-   "options": "Customers"
+   "options": "Occupancy Tracker"
   },
   {
    "fieldname": "amended_from",
@@ -57,27 +51,28 @@
    "label": "SEWA Date Range"
   },
   {
-   "fieldname": "from",
+   "fieldname": "section_break_la7nx",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "sewa_from",
    "fieldtype": "Date",
    "label": "From"
   },
   {
-   "fieldname": "to",
+   "fieldname": "sewa_to",
    "fieldtype": "Date",
    "label": "To"
-  },
-  {
-   "fieldname": "section_break_la7nx",
-   "fieldtype": "Section Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2023-07-04 15:31:00.720958",
+ "modified": "2023-07-05 03:22:46.675184",
  "modified_by": "Administrator",
  "module": "Property Management",
  "name": "Room Occupancy Tracker",
+ "naming_rule": "Expression (old style)",
  "owner": "Administrator",
  "permissions": [
   {
