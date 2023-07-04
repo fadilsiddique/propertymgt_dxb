@@ -10,3 +10,6 @@ def append_customer_in_room(doc,event):
     })
 
     room.save()
+
+def send_invoice(doc,event):
+    customer = frappe.get_doc('Customer',doc.customer)

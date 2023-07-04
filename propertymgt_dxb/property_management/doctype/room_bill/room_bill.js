@@ -27,6 +27,16 @@ frappe.ui.form.on('Room Bill', {
 		}, __('Create'))
 
 	},
+	validate: function(frm){
+		let sewa_amount = frm.doc.sewa_amount
+		let water_amount = frm.doc.water_amount
+		let gas_amount = frm.doc.gas_amount
+		let electricity_amount = frm.doc.electricity_amount
+
+		let municipality_charges = sewa_amount - (water_amount + gas_amount + electricity_amount)
+
+		frm.set_value('sharjah_municipality_charges',municipality_charges)
+	},
 	apartment: function(frm){
 		let apartment = frm.doc.apartment
 
@@ -344,6 +354,15 @@ frappe.ui.form.on('Room Bill', {
 				}
 			})
 		}
+	},
+	previous_electricity_reading: function(frm){
+		let current_electricity_reading = frm.doc.current_electricity_reading
+		let previous_electricity_reading = frm.doc.previous_electricity_reading
+		let total_units_used = current_electricity_reading - previous_electricity_reading
+		let electricity_rate = frm.doc.electricity_rate__unit
+		frm.set_value('total_units_used',total_units_used)
+		let electricity_amount = total_units_used * electricity_rate
+		frm.set_value('electricity_amount',electricity_amount)
 	}
 
 });
@@ -361,15 +380,19 @@ frappe.ui.form.on('Room Electricity Usage', {
 	ac_usage: function(frm,cdt,cdn){
 		let room = locals[cdt][cdn]
 		let sum = 0
+		let total_ac_unit = 0
 		let amount = (room.ac_usage)*room.electricity_rateunit
 		frappe.model.set_value(cdt,cdn, 'amount',amount)
 		frm.doc.room_wise_ac_usage.map((e)=>{
 			sum += e.amount
+			total_ac_unit += e.ac_usage
 		})
 		let amount_without_ac = frm.doc.total_electricity_amount_without_ac
 		let total_electricity_amount = frm.doc.electricity_amount
+		let total_units = frm.doc.total_units_used
 
 		frm.set_value('total_electricity_amount_without_ac',(total_electricity_amount - sum))
+		frm.set_value('balance_units',total_units - total_ac_unit)
 
 	}
 }); 
