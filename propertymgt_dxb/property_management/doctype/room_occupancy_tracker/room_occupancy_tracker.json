@@ -1,0 +1,99 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2023-07-04 15:27:55.882302",
+ "default_view": "List",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "apartment",
+  "flat",
+  "room",
+  "sewa_date_range_column",
+  "from",
+  "to",
+  "section_break_la7nx",
+  "customers",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "apartment",
+   "fieldtype": "Link",
+   "label": "Apartment",
+   "options": "Apartment"
+  },
+  {
+   "fieldname": "flat",
+   "fieldtype": "Link",
+   "label": "Flat",
+   "options": "Flat"
+  },
+  {
+   "fieldname": "room",
+   "fieldtype": "Link",
+   "label": "Room",
+   "options": "Room"
+  },
+  {
+   "fieldname": "customers",
+   "fieldtype": "Table",
+   "label": "Customers",
+   "options": "Customers"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Room Occupancy Tracker",
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "sewa_date_range_column",
+   "fieldtype": "Section Break",
+   "label": "SEWA Date Range"
+  },
+  {
+   "fieldname": "from",
+   "fieldtype": "Date",
+   "label": "From"
+  },
+  {
+   "fieldname": "to",
+   "fieldtype": "Date",
+   "label": "To"
+  },
+  {
+   "fieldname": "section_break_la7nx",
+   "fieldtype": "Section Break"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2023-07-04 15:31:00.720958",
+ "modified_by": "Administrator",
+ "module": "Property Management",
+ "name": "Room Occupancy Tracker",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
