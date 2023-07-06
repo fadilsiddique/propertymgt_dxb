@@ -43,11 +43,11 @@ frappe.ui.form.on('Room Bill', {
 			frm.set_value('sewa_amount',doc.sewa_amount)
 			frm.set_value('water_amount',doc.water_amount)
 			frm.set_value('gas_amount',doc.gas_amount)
-			// frm.set_value('electricity_amount',123.30)
-			// frm.set_value('previous_electricity_reading',doc.previous_electricity_reading)
-			// frm.set_value('current_electricity_reading',doc.current_electricity_reading)
+			frm.set_value('electricity_amount',doc.electricity_amount)
+			frm.set_value('previous_electricity_reading',doc.previous_electricity_reading)
+			frm.set_value('current_electricity_reading',doc.current_electricity_reading)
 			// frm.set_value('electricity_amount',doc.previous_electricity_reading + doc.current_electricity_reading)
-			// frm.set_value('total_units_used',doc.total_units_used)
+			frm.set_value('total_units_used',doc.total_units_used)
 
 		})
 	},
@@ -67,6 +67,9 @@ frappe.ui.form.on('Room Bill', {
 		
 		let flat_number=frm.doc.flat_no
 		let apartment = frm.doc.apartment
+		let sewa_from=frm.doc.sewa_bill_from
+		let sewa_to = frm.doc.sewa_bill_to
+		console.log(sewa_from,"helllellel")
 
 		frm.set_query("room_no",function(){
 			return {
@@ -80,19 +83,21 @@ frappe.ui.form.on('Room Bill', {
 		frappe.call({
 			method:"propertymgt_dxb.property_management.api.rental.get_customers_by_flat",
 			args:{
-				flat_no:flat_number
+				flat_no:flat_number,
+				sewa_from:sewa_from,				
+				sewa_to:sewa_to
 			},
 			callback:((response)=>{
 				let customers = response.message
+
+				console.log(response.message)
 
 				if (customers){
 
 					customers.map((e)=>{
 						frappe.db.get_list('Customer',{filters:{'name':e},fields:['name','room']})
 						.then(function(event){
-							console.log(event)
 							let room = event[0]['room']
-							console.log(room)
 							let electricity_bill_table = frm.add_child('electricity_usage_table',{
 								customer:e,
 								room:room
@@ -148,8 +153,6 @@ frappe.ui.form.on('Room Bill', {
 		let sewa_amount = frm.doc.sewa_amount
 		let customers_array = []
 
-		console.log(frm.doc.customers)
-
 		// customers.map((res)=>{
 		// 	customers_array.push(res.customer)
 		// })
@@ -165,7 +168,6 @@ frappe.ui.form.on('Room Bill', {
 				flat:frm.doc.flat_no
 			},
 			callback:((response)=>{
-				console.log(response)
 				let res = response.message[0]
 				frm.set_value('total_days_of_occupancy',response.message[1])
 				const rate = frm.doc.sewa_amount/frm.doc.total_days_of_occupancy
@@ -207,7 +209,6 @@ frappe.ui.form.on('Room Bill', {
 				flat:frm.doc.flat_no
 			},
 			callback:((response)=>{
-				console.log(response)
 				let res = response.message[0]
 				const rate = frm.doc.electricity_amount/frm.doc.total_days_of_occupancy
 				res.map((e)=>{
@@ -253,7 +254,6 @@ frappe.ui.form.on('Room Bill', {
 				flat:frm.doc.flat_no
 			},
 			callback:((response)=>{
-				console.log(response)
 				let res = response.message[0]
 				frm.set_value('total_days_of_occupancy',response.message[1])
 				const rate = frm.doc.water_amount/frm.doc.total_days_of_occupancy
@@ -297,7 +297,6 @@ frappe.ui.form.on('Room Bill', {
 				flat:frm.doc.flat_no
 			},
 			callback:((response)=>{
-				console.log(response)
 				let res = response.message[0]
 				frm.set_value('total_days_of_occupancy',response.message[1])
 				const rate = frm.doc.gas_amount/frm.doc.total_days_of_occupancy
@@ -384,7 +383,7 @@ frappe.ui.form.on('Room Electricity Usage', {
 		})
 		let amount_without_ac = frm.doc.total_electricity_amount_without_ac
 		let total_electricity_amount = frm.doc.electricity_amount
-		let total_units = frm.doc.total_units_used
+		let total_units = frm.doc.total_units_used 
 
 		frm.set_value('total_electricity_amount_without_ac',(total_electricity_amount - sum))
 		frm.set_value('balance_units',total_units - total_ac_unit)

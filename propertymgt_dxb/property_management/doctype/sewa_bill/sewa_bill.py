@@ -13,13 +13,11 @@ class SEWABill(Document):
 			'flat':self.flat,
 		},fields=['name','apartment','flat','room'])
 
-		print(customer,"hello")
 		rooms_array = []
 
 		for i in customer:
 			room_object = {'customer':i['name'],'room':i['room']}
 			rooms_array.append(room_object)
-		print(rooms_array)
 
 		room_occupancy_tracker = frappe.get_doc({
 			'doctype':'Room Occupancy Tracker',
