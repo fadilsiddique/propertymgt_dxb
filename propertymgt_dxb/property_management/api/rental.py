@@ -4,20 +4,38 @@ import json
 import ast
 
 @frappe.whitelist()
-def get_customers_by_flat(flat_no):
+def get_customers_by_flat(flat_no,sewa_from,sewa_to):
 
     room_numbers=[]
     customers = []
+    date_format = "%Y-%m-%d"
+    sewa_from = str(sewa_from)
+    sewa_to = str(sewa_to)
+    sewa_from_fromat = datetime.strptime(sewa_from, date_format)
+    sewa_to_format = datetime.strptime(sewa_to,date_format)
     ##add filter staus=in
     tenants = frappe.db.get_list('Customer',filters={
         'flat':flat_no,
-        'current_status': 'In' or 'Vacation' or ''
     },
-    fields=['name','flat']
+    fields=['name','flat','current_status','last_checkout_date']
     )
 
+    print(tenants),"tenanananna"
     for tenant in tenants:
-        customers.append(tenant.name)
+        print(tenant.current_status)
+        print(tenant.name)
+        last_checkout_date = str(tenant.last_checkout_date)
+        last_checkout_format=datetime.strptime(last_checkout_date,date_format)
+        if tenant.current_status == 'Out' and sewa_from_fromat <= last_checkout_format <= sewa_to_format:
+            
+            customers.append(tenant.name)
+            print(customers,"out")
+
+        if tenant.current_satus == 'In' or tenant.current_satus ==' Vacation':
+
+            customers.append(tenant.name)
+            print(customers,"in")
+    print(customers)
         
     return customers
 
@@ -222,17 +240,19 @@ def make_sales_invoice(apartment,flat,sewa,electricity,gas,water,internet,refere
         filtered_internet = [item for item in internet if item['customer'] == tenant]
 
 
-        total_sewa = 0
+        total_electricity = 0
+        total_water = 0
+        total_gas = 0 
         total_internet =0
 
         for item in filtered_electricity:
-            total_sewa +=float(item['total_with_ac'])
+            total_electricity +=float(item['total_with_ac'])
         
         for item in filtered_gas:
-            total_sewa +=item['amount']
+            total_gas +=item['amount']
 
         for item in filtered_water:
-            total_sewa += item['amount']
+            total_water += item['amount']
         for item in filtered_internet:
             total_internet +=item['amount']
 
@@ -243,20 +263,33 @@ def make_sales_invoice(apartment,flat,sewa,electricity,gas,water,internet,refere
             'room_bill_reference_id':reference if reference else "",
             'items':[
                 {
-                    'item_code':'SEWA',
-                    'rate':total_sewa,
+                    'item_code':customer.service_type,
+                    'rate':rate,
                     'qty':1
+                },
+                {
+                    'item_code':'ELECTRICITY',
+                    'rate':total_electricity,
+                    'qty':1
+
+                },
+                {
+                    'item_code':'WATER',
+                    'rate':total_water,
+                    'qty':1
+
+                },
+                {
+                    'item_code':'GAS',
+                    'rate':total_gas,
+                    'qty':1
+
                 },
                 {
                     'item_code':'DATA',
                     'rate':total_internet,
                     'qty':1
                 },
-                {
-                    'item_code':customer.service_type,
-                    'rate':rate,
-                    'qty':1
-                }
             ]
         })
 
