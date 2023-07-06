@@ -9,8 +9,8 @@ class CustomerActivityLog(Document):
 		if self.activity_type == 'In' or self.activity_type == 'Out':
 			frappe.db.set_value('Customer',self.customer,'current_status',self.activity_type)
 		if self.activity_type == 'Out':
+			frappe.db.set_value('Customer',self.customer,'last_checkout_date',self.check_out_date)
 			room = frappe.get_doc('Room',self.room_no)
-			
 			for customer in room.tenants:
 				if customer.customer ==self.customer:
 					room.tenants.remove(customer)
