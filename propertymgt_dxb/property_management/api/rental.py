@@ -24,17 +24,16 @@ def get_customers_by_flat(flat_no,sewa_from,sewa_to):
     for tenant in tenants:
         print(tenant.current_status)
         print(tenant.name)
-        last_checkout_date = str(tenant.last_checkout_date)
-        last_checkout_format=datetime.strptime(last_checkout_date,date_format)
-        if tenant.current_status == 'Out' and sewa_from_fromat <= last_checkout_format <= sewa_to_format:
-            
+        print(tenant.last_checkout_date,"heheheh")
+        if tenant.current_status == 'In':
             customers.append(tenant.name)
-            print(customers,"out")
-
-        if tenant.current_satus == 'In' or tenant.current_satus ==' Vacation':
-
-            customers.append(tenant.name)
-            print(customers,"in")
+            print(customers,"bro")
+        
+        elif tenant.current_status == 'Out' and tenant.last_checkout_date != None:
+            last_checkout_date = str(tenant.last_checkout_date)
+            last_checkout_format=datetime.strptime(last_checkout_date,date_format)
+            if sewa_from_fromat <= last_checkout_format <= sewa_to_format:
+                customers.append(tenant.name)
     print(customers)
         
     return customers

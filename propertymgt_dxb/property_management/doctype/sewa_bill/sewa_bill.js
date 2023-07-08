@@ -11,6 +11,6 @@ frappe.ui.form.on('SEWA Bill', {
 		let previous_electricity_reading = frm.doc.previous_electricity_reading
 		let units_used = current_electricity_reading - previous_electricity_reading
 		frm.set_value('total_units_used',units_used)
-		frm.set_value('electricity_amount',units_used * frm.doc.electricity_rateunit)
+		// frm.set_value('electricity_amount',units_used * frm.doc.electricity_rateunit)
 	}
 });

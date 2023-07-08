@@ -89,12 +89,16 @@ frappe.ui.form.on('Room Bill', {
 			},
 			callback:((response)=>{
 				let customers = response.message
+				console.log(customers,"workkk")
 
 				console.log(response.message)
 
 				if (customers){
-
+					frm.doc.customers = frm.doc.customers || [];
 					customers.map((e)=>{
+						console.log(e,"E")
+						let existingCustomer = frm.doc.customers.find((customer) => customer.customer === e);
+						if (!existingCustomer){
 						frappe.db.get_list('Customer',{filters:{'name':e},fields:['name','room']})
 						.then(function(event){
 							let room = event[0]['room']
@@ -118,6 +122,7 @@ frappe.ui.form.on('Room Bill', {
 						let internet_bill_table = frm.add_child('internet_bill_table',{
 							customer:e
 						})
+						}
 					})
 
 				}
@@ -134,13 +139,14 @@ frappe.ui.form.on('Room Bill', {
 		frappe.db.get_list('Room',{filters:
 			{'flat_no':frm.doc.flat_no}})
 			.then((e)=>{
-			
+			frm.doc.room_wise_ac_usage = frm.doc.room_wise_ac_usage || []
 			e.map((res)=>{
-
+				let existing_room = frm.doc.room_wise_ac_usage.find((room)=> room.room === res.name);
+				if (!existing_room){
 				let ac_usage_table = frm.add_child('room_wise_ac_usage',{
 					room:res.name
 				})
-
+			}
 			})
 			frm.refresh_field('room_wise_ac_usage')
 		})
@@ -390,3 +396,7 @@ frappe.ui.form.on('Room Electricity Usage', {
 
 	}
 }); 
+
+
+
+
