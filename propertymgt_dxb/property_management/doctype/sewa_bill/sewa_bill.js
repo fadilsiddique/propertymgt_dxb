@@ -6,11 +6,22 @@ frappe.ui.form.on('SEWA Bill', {
 
 	// }
 
+	sewa_amount:function(frm){
+		let total_sewa_amount = frm.doc.sewa_amount + frm.doc.online_charges
+
+		frm.set_value('total_sewa_amount', total_sewa_amount)
+	},
+
 	previous_electricity_reading:function(frm){
 		let current_electricity_reading = frm.doc.current_electricity_reading
 		let previous_electricity_reading = frm.doc.previous_electricity_reading
 		let units_used = current_electricity_reading - previous_electricity_reading
-		frm.set_value('total_units_used',units_used)
+		let electricity_amount = frm.doc.total_sewa_amount - (frm.doc.gas_amount + frm.doc.water_amount)
+		frm.set_value({
+			total_units_used: units_used,
+			electricity_amount: electricity_amount
+		})
+
 		// frm.set_value('electricity_amount',units_used * frm.doc.electricity_rateunit)
 	}
 });
