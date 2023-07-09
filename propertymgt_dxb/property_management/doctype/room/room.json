@@ -14,6 +14,7 @@
   "meter_number",
   "capacity",
   "available_bed_space",
+  "total_no_of_tenants",
   "tenants"
  ],
  "fields": [
@@ -55,11 +56,16 @@
    "fieldname": "meter_number",
    "fieldtype": "Data",
    "label": "Meter Number"
+  },
+  {
+   "fieldname": "total_no_of_tenants",
+   "fieldtype": "Int",
+   "label": "Total No. Of Tenants"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-07-04 10:31:58.769619",
+ "modified": "2023-07-10 01:57:04.684519",
  "modified_by": "Administrator",
  "module": "Property Management",
  "name": "Room",
