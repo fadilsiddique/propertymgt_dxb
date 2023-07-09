@@ -12,6 +12,7 @@
   "flat_type",
   "owner_name",
   "flat_no",
+  "sewa_account_number",
   "no_of_rooms",
   "maximum_number_of_tenants",
   "no_of_available_bed_space",
@@ -67,6 +68,11 @@
    "fieldtype": "Link",
    "label": "Cost Center",
    "options": "Cost Center"
+  },
+  {
+   "fieldname": "sewa_account_number",
+   "fieldtype": "Data",
+   "label": "SEWA Account Number"
   }
  ],
  "index_web_pages_for_search": 1,
@@ -88,7 +94,7 @@
    "link_fieldname": "flat_no"
   }
  ],
- "modified": "2023-06-20 19:01:43.908560",
+ "modified": "2023-07-10 01:55:04.151081",
  "modified_by": "Administrator",
  "module": "Property Management",
  "name": "Flat",
