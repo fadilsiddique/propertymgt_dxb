@@ -2,9 +2,13 @@
 // For license information, please see license.txt
 
 frappe.ui.form.on('SEWA Bill', {
-	// refresh: function(frm) {
+	refresh: function(frm) {
 
-	// }
+		frm.add_custom_button(__('Room Bill'),function(){
+			frappe.route_options={'sewa_bill':frm.doc.name}
+			frappe.set_route('Form','Room Bill', 'new-room-bill')
+		}, __('Create'))
+	},
 
 	sewa_amount:function(frm){
 		let total_sewa_amount = frm.doc.sewa_amount + frm.doc.online_charges
