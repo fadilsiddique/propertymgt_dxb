@@ -12,6 +12,7 @@ function calculateBillAmount(customers,sewa_bill_from,sewa_bill_to,amount, child
             flat: frm.doc.flat_no
 
 		},
+		
 		callback:(response)=>{
 			let res = response.message[0];
 			frm.set_value('total_days_of_occupancy', response.message[1]);
@@ -31,6 +32,8 @@ function calculateBillAmount(customers,sewa_bill_from,sewa_bill_to,amount, child
 					}
 				}
 			})
+
+			frm.refresh_fields()
 		}
 	})
 }
@@ -91,19 +94,6 @@ frappe.ui.form.on('Room Bill', {
 				frm.set_value('total_units_used',doc.total_units_used)
 
 			})
-			// frm.set_value('sewa_bill_from',doc.sewa_from)
-			// frm.set_value('sewa_bill_to',doc.sewa_to)
-			// frm.set_value('apartment',doc.apartment)
-			// frm.set_value('flat_no',doc.flat)
-			// frm.set_value('sewa_amount',doc.sewa_amount)
-			// frm.set_value('water_amount',doc.water_amount)
-			// frm.set_value('gas_amount',doc.gas_amount)
-			// frm.set_value('electricity_amount',doc.electricity_amount)
-			// frm.set_value('previous_electricity_reading',doc.previous_electricity_reading)
-			// frm.set_value('current_electricity_reading',doc.current_electricity_reading)
-			// frm.set_value('electricity_amount',doc.previous_electricity_reading + doc.current_electricity_reading)
-			// frm.set_value('total_units_used',doc.total_units_used)
-
 		})
 	},
 	apartment: function(frm){
@@ -212,6 +202,8 @@ frappe.ui.form.on('Room Bill', {
 		let sewa_bill_from = frm.doc.sewa_bill_from
 		let sewa_bill_to = frm.doc.sewa_bill_to
 		let sewa_amount = frm.doc.sewa_amount
+		let electricity_amount = frm.doc.electricity_amount
+		frm.doc.is_bachelor_room=frm.doc.is_bachelor_room
 
 		calculateBillAmount(customers, sewa_bill_from, sewa_bill_to, sewa_amount, 'customers', 'rate', 'amount',frm);
 		
@@ -282,6 +274,39 @@ frappe.ui.form.on('Room Bill', {
 		}
 	},
 
+	is_bachelor_room: function(frm){
+
+		if (frm.doc.is_bachelor_room){
+
+			console.log("kjkjk")
+			let customers = frm.doc.customers
+			let sewa_bill_from = frm.doc.sewa_bill_from
+			let sewa_bill_to = frm.doc.sewa_bill_to
+			let electricity_amount = frm.doc.electricity_amount
+
+			calculateBillAmount(customers, sewa_bill_from, sewa_bill_to,electricity_amount,'customers', 'rate', 'amount',frm)
+
+			frm.clear_table("water_bill_table")
+			frm.clear_table("gas_bill_table")
+			frm.clear_table("room_wise_ac_usage")
+			frm.clear_table("electricity_usage_table")
+			frm.set_value("water_amount","")
+			frm.set_value("gas_amount","")
+			frm.set_value("electricity_amount","")
+			frm.set_value("total_days_of_occupancy","")
+			frm.refresh_fields()
+		}
+	},
+	remove_ac_usage_table:function(frm){
+
+		if(frm.doc.remove_ac_usage_table){
+
+			frm.clear_table("room_wise_ac_usage")
+			frm.refresh_fields()
+
+		}
+	}
+
 });
 
 frappe.ui.form.on('Room Electricity Usage', {
@@ -307,7 +332,27 @@ frappe.ui.form.on('Room Electricity Usage', {
 		frm.set_value('balance_units',total_units - total_ac_unit)
 
 	}
-}); 
+});
+
+frappe.ui.form.on('Customers',{
+
+	internet_bill_table_remove: function(frm,cdt,cdn){
+		let customers = frm.doc.internet_bill_table
+		let amount = frm.doc.internet_amount
+		let rate = amount/customers.length
+
+		for (var i = 0; i < customers.length; i++){
+			var row = customers[i]
+			frappe.model.set_value(row.doctype,row.name,'rate',rate)
+			frappe.model.set_value(row.doctype,row.name,'amount',rate)
+		}
+
+		frm.refresh_fields()
+		
+	}
+
+
+})
 
 
 
