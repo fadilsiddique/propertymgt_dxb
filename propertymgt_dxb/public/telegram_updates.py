@@ -46,7 +46,7 @@ def sendMessage(message,document_path):
     if message_response.status_code == 200 and document_response.status_code == 200:
         frappe.publish_progress(25, title='Sending Document To Telegrm', description='Sending..')
     else:
-        frappe.throw("Document Failed To Send")
+        frappe.throw(f"Document Fialed To Send {document_response.reason}")
 
 
 
