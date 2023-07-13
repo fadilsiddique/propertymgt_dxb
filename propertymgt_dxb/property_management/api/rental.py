@@ -245,7 +245,11 @@ def make_sales_invoice(apartment,flat,sewa,electricity,gas,water,internet,refere
         total_internet =0
 
         for item in filtered_electricity:
-            total_electricity +=float(item['total_with_ac'])
+            print(item)
+            if 'total_with_ac' in item:
+                total_electricity +=float(item['total_with_ac'])
+            else:
+                total_electricity += float(item['amount_wo_ac'])
         
         for item in filtered_gas:
             total_gas +=item['amount']
