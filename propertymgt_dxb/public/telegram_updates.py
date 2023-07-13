@@ -35,7 +35,7 @@ def sendMessage(message,document_path):
     BOT_API_KEY = settings.get_password(fieldname='token')
     BASE_URL = settings.base_url
     message_response = requests.get(f'https://api.telegram.org/bot{BOT_API_KEY}/sendMessage', {
-        'chat_id': 1616214251,
+        'chat_id': settings.chat_id,
         'text': message
     })
 
@@ -44,9 +44,9 @@ def sendMessage(message,document_path):
     document_response = requests.get(f'https://api.telegram.org/bot{BOT_API_KEY}/sendDocument',params=document_params)
 
     if message_response.status_code == 200 and document_response.status_code == 200:
-        frappe.throw("Document Successfully Send")
+        frappe.publish_progress(25, title='Sending Document To Telegrm', description='Sending..')
     else:
-        print(document_response.reason, message_response.reason, document_response.json())
+        frappe.throw("Document Failed To Send")
 
 
 
