@@ -9,7 +9,8 @@
  "field_order": [
   "token",
   "url",
-  "base_url"
+  "base_url",
+  "chat_id"
  ],
  "fields": [
   {
@@ -26,12 +27,17 @@
    "fieldname": "base_url",
    "fieldtype": "Data",
    "label": "Base URL"
+  },
+  {
+   "fieldname": "chat_id",
+   "fieldtype": "Data",
+   "label": "Chat Id"
   }
  ],
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2023-07-13 22:18:43.127645",
+ "modified": "2023-07-14 03:30:36.664166",
  "modified_by": "Administrator",
  "module": "Property Management",
  "name": "Telegram Settings",
