@@ -35,7 +35,7 @@ def sendMessage(message,document_path):
     BOT_API_KEY = settings.get_password(fieldname='token')
     BASE_URL = settings.base_url
     message_response = requests.get(f'https://api.telegram.org/bot{BOT_API_KEY}/sendMessage', {
-        'chat_id': settings.chat_id,
+        'chat_id': 1073857759,
         'text': message
     })
 
