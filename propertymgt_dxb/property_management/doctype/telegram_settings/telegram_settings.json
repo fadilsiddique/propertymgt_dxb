@@ -8,7 +8,8 @@
  "engine": "InnoDB",
  "field_order": [
   "token",
-  "url"
+  "url",
+  "base_url"
  ],
  "fields": [
   {
@@ -20,12 +21,17 @@
    "fieldname": "url",
    "fieldtype": "Data",
    "label": "URL"
+  },
+  {
+   "fieldname": "base_url",
+   "fieldtype": "Data",
+   "label": "Base URL"
   }
  ],
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2023-07-01 06:42:01.998759",
+ "modified": "2023-07-13 22:18:43.127645",
  "modified_by": "Administrator",
  "module": "Property Management",
  "name": "Telegram Settings",
