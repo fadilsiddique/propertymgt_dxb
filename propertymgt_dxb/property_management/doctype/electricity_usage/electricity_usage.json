@@ -60,12 +60,12 @@
    "in_list_view": 1,
    "in_preview": 1,
    "in_standard_filter": 1,
-   "label": "Rate (W/O AC)"
+   "label": "Rate"
   },
   {
    "fieldname": "amount_wo_ac",
    "fieldtype": "Data",
-   "label": "Amount (W/O AC)"
+   "label": "Amount"
   },
   {
    "fieldname": "total_with_ac",
@@ -79,7 +79,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2023-06-15 13:23:29.907908",
+ "modified": "2023-07-11 02:22:48.730702",
  "modified_by": "Administrator",
  "module": "Property Management",
  "name": "Electricity Usage",

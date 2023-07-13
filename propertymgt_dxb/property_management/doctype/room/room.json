@@ -1,5 +1,6 @@
 {
  "actions": [],
+ "allow_import": 1,
  "allow_rename": 1,
  "autoname": "format:{flat_no}/{room_no}",
  "creation": "2023-06-01 01:48:10.266045",
@@ -65,7 +66,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-07-10 01:57:04.684519",
+ "modified": "2023-07-11 19:27:01.145114",
  "modified_by": "Administrator",
  "module": "Property Management",
  "name": "Room",

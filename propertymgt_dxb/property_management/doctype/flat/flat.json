@@ -1,5 +1,6 @@
 {
  "actions": [],
+ "allow_import": 1,
  "allow_rename": 1,
  "autoname": "format:{apartment}-{flat_no}",
  "creation": "2023-06-01 01:39:26.936852",
@@ -94,7 +95,7 @@
    "link_fieldname": "flat_no"
   }
  ],
- "modified": "2023-07-10 01:55:04.151081",
+ "modified": "2023-07-11 19:26:40.599002",
  "modified_by": "Administrator",
  "module": "Property Management",
  "name": "Flat",

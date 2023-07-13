@@ -1,5 +1,6 @@
 {
  "actions": [],
+ "allow_import": 1,
  "allow_rename": 1,
  "autoname": "field:apartment_name",
  "creation": "2023-06-01 01:24:34.019645",
@@ -73,7 +74,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-06-20 19:01:16.633298",
+ "modified": "2023-07-11 19:26:10.503063",
  "modified_by": "Administrator",
  "module": "Property Management",
  "name": "Apartment",

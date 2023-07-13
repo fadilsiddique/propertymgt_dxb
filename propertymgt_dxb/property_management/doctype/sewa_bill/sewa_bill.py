@@ -8,7 +8,7 @@ from propertymgt_dxb.property_management.api.rental import calculate_days
 class SEWABill(Document):
 	def on_submit(self):
 		customer = frappe.db.get_list('Customer',filters={
-			'current_status':'In',
+			'current_status':['In','Vacation'],
 			'apartment':self.apartment,
 			'flat':self.flat,
 		},fields=['name','apartment','flat','room'])

@@ -1,5 +1,6 @@
 {
  "actions": [],
+ "allow_import": 1,
  "allow_rename": 1,
  "autoname": "format:RB-{MM}-{YY}-{#####}",
  "creation": "2023-06-05 19:02:41.294333",
@@ -15,6 +16,7 @@
   "apartment",
   "flat_no",
   "section_break_kauxw",
+  "is_bachelor_room",
   "sewa_amount",
   "customers",
   "water_bill_section",
@@ -36,6 +38,8 @@
   "electricity_rate__unit",
   "section_break_pfmes",
   "electricity_amount",
+  "section_break_ka4ri",
+  "remove_ac_usage_table",
   "room_wise_ac_usage",
   "balance_units",
   "total_electricity_amount_without_ac",
@@ -158,6 +162,7 @@
    "label": "Others"
   },
   {
+   "depends_on": "eval:doc.remove_ac_usage_table==0",
    "fieldname": "room_wise_ac_usage",
    "fieldtype": "Table",
    "label": "Room Wise AC Usage",
@@ -170,6 +175,7 @@
    "options": "Electricity Usage"
   },
   {
+   "depends_on": "eval:doc.remove_ac_usage_table==0",
    "fieldname": "total_electricity_amount_without_ac",
    "fieldtype": "Float",
    "label": "Total Electricity Amount Without AC"
@@ -202,6 +208,7 @@
    "read_only": 1
   },
   {
+   "depends_on": "eval:doc.remove_ac_usage_table==0",
    "fieldname": "balance_units",
    "fieldtype": "Int",
    "label": "Balance Units"
@@ -237,12 +244,28 @@
    "fieldtype": "Link",
    "label": "SEWA Bill (Optional)",
    "options": "SEWA Bill"
+  },
+  {
+   "fieldname": "section_break_ka4ri",
+   "fieldtype": "Section Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_bachelor_room",
+   "fieldtype": "Check",
+   "label": "Is Bachelor Room"
+  },
+  {
+   "default": "0",
+   "fieldname": "remove_ac_usage_table",
+   "fieldtype": "Check",
+   "label": "Remove AC Usage Table"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2023-07-09 04:45:30.046664",
+ "modified": "2023-07-11 19:25:52.887752",
  "modified_by": "Administrator",
  "module": "Property Management",
  "name": "Room Bill",

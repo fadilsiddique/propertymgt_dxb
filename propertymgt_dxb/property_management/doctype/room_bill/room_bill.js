@@ -55,9 +55,6 @@ frappe.ui.form.on('Room Bill', {
 					internet:frm.doc.internet_bill_table,
 					reference:frm.doc.name ? frm.doc.name : ''
 				},
-				callback:((response)=>{
-					console.log(response)
-				})
 			})
 		
 			frappe.set_route('List','Sales Invoice','List')
@@ -114,8 +111,7 @@ frappe.ui.form.on('Room Bill', {
 		let apartment = frm.doc.apartment
 		let sewa_from=frm.doc.sewa_bill_from
 		let sewa_to = frm.doc.sewa_bill_to
-		console.log(sewa_from,"helllellel")
-
+		
 		frm.set_query("room_no",function(){
 			return {
 				filters:{
@@ -134,14 +130,10 @@ frappe.ui.form.on('Room Bill', {
 			},
 			callback:((response)=>{
 				let customers = response.message
-				console.log(customers,"workkk")
-
-				console.log(response.message)
 
 				if (customers){
 					frm.doc.customers = frm.doc.customers || [];
 					customers.map((e)=>{
-						console.log(e,"E")
 						let existingCustomer = frm.doc.customers.find((customer) => customer.customer === e);
 						if (!existingCustomer){
 						frappe.db.get_list('Customer',{filters:{'name':e},fields:['name','room']})
@@ -205,7 +197,7 @@ frappe.ui.form.on('Room Bill', {
 		let electricity_amount = frm.doc.electricity_amount
 		frm.doc.is_bachelor_room=frm.doc.is_bachelor_room
 
-		calculateBillAmount(customers, sewa_bill_from, sewa_bill_to, sewa_amount, 'customers', 'rate', 'amount',frm);
+		calculateBillAmount(customers, sewa_bill_from, sewa_bill_to, electricity_amount, 'customers', 'rate', 'amount',frm);
 		
 	},
 	electricity_amount: function(frm){
@@ -278,13 +270,13 @@ frappe.ui.form.on('Room Bill', {
 
 		if (frm.doc.is_bachelor_room){
 
-			console.log("kjkjk")
 			let customers = frm.doc.customers
 			let sewa_bill_from = frm.doc.sewa_bill_from
 			let sewa_bill_to = frm.doc.sewa_bill_to
 			let electricity_amount = frm.doc.electricity_amount
+			let sewa_amount = frm.doc.sewa_amount
 
-			calculateBillAmount(customers, sewa_bill_from, sewa_bill_to,electricity_amount,'customers', 'rate', 'amount',frm)
+			calculateBillAmount(customers, sewa_bill_from, sewa_bill_to,sewa_amount,'customers', 'rate', 'amount',frm)
 
 			frm.clear_table("water_bill_table")
 			frm.clear_table("gas_bill_table")

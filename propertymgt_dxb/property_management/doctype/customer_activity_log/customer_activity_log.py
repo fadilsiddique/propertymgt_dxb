@@ -6,7 +6,7 @@ from frappe.model.document import Document
 
 class CustomerActivityLog(Document):
 	def on_submit(self):
-		if self.activity_type == 'In' or self.activity_type == 'Out':
+		if self.activity_type == 'In' or self.activity_type == 'Out' or self.activity_type == 'Vacation':
 			frappe.db.set_value('Customer',self.customer,'current_status',self.activity_type)
 		if self.activity_type == 'Out':
 			frappe.db.set_value('Customer',self.customer,'last_checkout_date',self.check_out_date)
