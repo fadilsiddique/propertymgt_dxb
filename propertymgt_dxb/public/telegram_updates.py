@@ -35,12 +35,12 @@ def sendMessage(message,document_path):
     BOT_API_KEY = settings.get_password(fieldname='token')
     BASE_URL = settings.base_url
     message_response = requests.get(f'https://api.telegram.org/bot{BOT_API_KEY}/sendMessage', {
-        'chat_id': 1073857759,
+        'chat_id': settings.chat_id,
         'text': message
     })
 
     # document_files = {"document": open(document_path, "rb")}
-    document_params = {"chat_id":1073857759,"document":f"{BASE_URL}{document_path}"}
+    document_params = {"chat_id":settings.chat_id,"document":f"{BASE_URL}{document_path}"}
     document_response = requests.get(f'https://api.telegram.org/bot{BOT_API_KEY}/sendDocument',params=document_params)
 
     if message_response.status_code != 200 and document_response.status_code != 200:
