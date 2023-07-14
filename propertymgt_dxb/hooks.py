@@ -113,6 +113,9 @@ app_license = "MIT"
 doc_events = {
     "Customer":{
         "after_insert":"propertymgt_dxb.public.automate.append_customer_in_room"
+    },
+    "Sales Invoice": {
+        "on_update":"propertymgt_dxb.public.automate.send_invoice_via_telegram"
     }
 }
 
