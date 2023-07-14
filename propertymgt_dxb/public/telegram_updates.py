@@ -43,10 +43,9 @@ def sendMessage(message,document_path):
     document_params = {"chat_id":1616214251,"document":f"{BASE_URL}{document_path}"}
     document_response = requests.get(f'https://api.telegram.org/bot{BOT_API_KEY}/sendDocument',params=document_params)
 
-    if message_response.status_code == 200 and document_response.status_code == 200:
-        frappe.publish_progress(25, title='Sending Document To Telegrm', description='Sending..')
-    else:
+    if message_response.status_code != 200 and document_response.status_code != 200:
         frappe.throw(f"Document Fialed To Send {document_response.reason}")
+        
 
 
 
